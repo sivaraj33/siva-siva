@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Details List</title>
+</head>
+<body>
+    <h1>Details List</h1>
+    
+    <!-- Corrected "Add New Detail" button -->
+    <a href="{% url 'add' %}">
+        <button type="button">Add New Detail</button>
+    </a>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>First Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for qry in query %}
+            <tr>
+                <td>{{ qry.Name }}</td>
+                <td>{{ qry.FirstName }}</td>
+                <td>{{ qry.Email }}</td>
+                <td>{{ qry.PhoneNumber }}</td>
+                <td>{{qry.Gender}}</td>
+
+                <td>
+                    <a href="{% url 'update_detail' qry.id %}" onclick="return confirm('Are you sure you want to update this item?');">
+                        <button type="button">Update</button>
+                    </a>
+                    <a href="{% url 'delete_detail' qry.id %}" onclick="return confirm('Are you sure you want to delete this item?');">
+                        <button type="button">Delete</button>
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No details available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Add another link for adding new detail -->
+    <a href="{% url 'add' %}">
+        <button type="button">Add New Detail</button>
+    </a>
+
+</body>
+</html>
